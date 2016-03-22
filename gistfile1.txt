@@ -1,0 +1,158 @@
+<!-- Enter your HTML code here -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Binary Calculator</title>
+        <!--<link rel="stylesheet" href="css/binaryCalculator.css" type="text/css">-->
+        <style>
+            #res {
+      background-color:lightgray;
+      border-style: solid;
+      width:81%;
+      height:48px;
+      font-size:20px;
+  }
+
+#btns {
+	width:90%;
+}
+
+.buttonClassLightGreen{
+    background-color:lightgreen;
+    color:brown;
+    width:22%;
+    height:36px;
+    font-size:18px;
+}
+
+.buttonClassDarkGreen{
+    background-color:darkgreen;
+    color:white;
+    width:22%;
+    height:36px;
+    font-size:18px;
+}
+
+.buttonClassBlack{
+    background-color:black;
+    color:red;
+    width:22%;
+    height:36px;
+    font-size:18px;
+}           
+        </style>
+    </head>
+    <body>
+        <div id="res"></div>
+           
+          <div id="btns" class="buttonContainer">
+            <button id="btn0" class="buttonClassLightGreen">0</button>
+            <button id="btn1" class="buttonClassLightGreen">1</button>
+            <button id="btnClr" class="buttonClassDarkGreen">C</button>
+            <button id="btnEql" class="buttonClassDarkGreen">=</button>
+            <button id="btnSum" class="buttonClassBlack">+</button>
+            <button id="btnSub" class="buttonClassBlack">-</button>
+            <button id="btnMul" class="buttonClassBlack">*</button>
+            <button id="btnDiv" class="buttonClassBlack">/</button>
+            
+        </div>
+        <script>
+        var operand1=""; 
+var operand2="";
+var operator="";
+var isOperand1=true;
+
+var action = function() {
+    var e = window.event;
+    var btn = e.target || e.srcElement;
+    
+    if (document.getElementById(btn.id).innerHTML =="0"){
+  //document.getElementById("res").innerHTML = document.getElementById(btn.id).innerHTML;
+            if (isOperand1){
+                operand1 = operand1 + document.getElementById(btn.id).innerHTML;
+            }
+            else {
+                operand2 = operand2 + document.getElementById(btn.id).innerHTML;
+            }
+            document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "0"; 
+  	}
+  	else if(document.getElementById(btn.id).innerHTML =="1"){
+  			if (isOperand1){
+                operand1 = operand1 + document.getElementById(btn.id).innerHTML;
+            }
+            else {
+                operand2 = operand2 + document.getElementById(btn.id).innerHTML;
+            }
+            document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "1"; 
+  	}
+	else if(document.getElementById(btn.id).innerHTML =="C"){
+			operand1=""; 
+            operand2=""; 
+            operator="";
+            isOperand1 = true;
+            document.getElementById("res").innerHTML = "";
+	}
+	else if (document.getElementById(btn.id).innerHTML == "="){
+			if (!isOperand1){
+				var op1 = parseInt(operand1, 2);
+           		var op2 = parseInt(operand2, 2);
+            	if (operator=="+"){var ans = op1+op2;}
+            	else if (operator=="-"){var ans = op1-op2;}
+            	else if (operator=="*"){var ans = op1*op2;}
+            	else if (operator=="/"){var ans = op1/op2;}
+            	document.getElementById("res").innerHTML =ans.toString(2);
+            	operand1 =document.getElementById("res").innerHTML;
+            	operand2="";
+            	operator="";
+            	isOperand1=true;
+            }
+            else {}//document.getElementById("res").innerHTML = "hello";
+	}
+	else if (document.getElementById(btn.id).innerHTML == "+"){
+			if (isOperand1){
+                isOperand1=false;
+                operator="+";
+                document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "+";
+			}
+	}
+	else if (document.getElementById(btn.id).innerHTML =="-"){
+			if (isOperand1){
+                isOperand1=false;
+                operator="-";
+                document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "-";
+            }
+	}
+	else if (document.getElementById(btn.id).innerHTML =="*"){
+			if (isOperand1){
+                isOperand1=false;
+                operator="*";
+                document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "*";	
+            }
+	}
+	else if (document.getElementById(btn.id).innerHTML =="/"){
+			if (isOperand1){
+                isOperand1=false;
+                operator="/";
+                document.getElementById("res").innerHTML = document.getElementById("res").innerHTML + "/";
+            }
+	}
+        // document.getElementById("test").innerHTML = "tester: " + "operator: " + operator + "| isOperand1: " + isOperand1 + " | op1: " + operand1 + " | op2: " + operand2;
+}
+
+
+
+
+document.getElementById("btn0").onclick = action;
+document.getElementById("btn1").onclick = action;
+document.getElementById("btnClr").onclick = action;
+document.getElementById("btnEql").onclick = action;
+document.getElementById("btnSum").onclick = action;
+document.getElementById("btnSub").onclick = action;
+document.getElementById("btnMul").onclick = action;
+document.getElementById("btnDiv").onclick = action;
+        
+        
+        </script>
+    </body>
+</html>
